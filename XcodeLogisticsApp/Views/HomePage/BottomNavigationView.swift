@@ -1,92 +1,160 @@
 import SwiftUI
 
-struct BottomNavigationView: View {
+struct MainTabView: View {
     @State private var selectedTab = 0
+    
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            TabView(selection: $selectedTab) {
+                HomePageView()
+                    .tag(0)
+                
+                OrdersView()
+                    .tag(1)
+                
+                Color.clear // 占位，不显示任何内容
+                    .tag(2)
+                
+                MessagesView()
+                    .tag(3)
+                
+                ProfileView()
+                    .tag(4)
+            }
+            
+            BottomNavigationView(selectedTab: $selectedTab)
+                .padding(.bottom, 30)
+        }
+        .ignoresSafeArea(.keyboard)
+    }
+}
+
+struct BottomNavigationView: View {
+    @Binding var selectedTab: Int
     @State private var isAnimated = false
     
     var body: some View {
-        VStack(spacing: 0) {
-            Spacer()
+        // 底部导航栏背景
+        ZStack {
+            BlurView(style: .systemThinMaterial)
+                .overlay(
+                    Rectangle()
+                        .frame(height: 0.5)
+                        .foregroundColor(DesignSystem.Colors.separator)
+                        .opacity(0.8),
+                    alignment: .top
+                )
             
-            // 底部导航栏背景
-            ZStack {
-                BlurView(style: .systemThinMaterial)
-                    .overlay(
-                        Rectangle()
-                            .frame(height: 0.5)
-                            .foregroundColor(DesignSystem.Colors.separator)
-                            .opacity(0.8),
-                        alignment: .top
-                    )
+            // 导航栏内容
+            HStack(spacing: 0) {
+                // 首页
+                TabButton(
+                    icon: "house.fill",
+                    title: "首页",
+                    isSelected: selectedTab == 0,
+                    action: { selectedTab = 0 }
+                )
                 
-                // 导航栏内容
-                HStack(spacing: 0) {
-                    // 首页
-                    TabButton(
-                        icon: "house.fill",
-                        title: "首页",
-                        isSelected: selectedTab == 0,
-                        action: { selectedTab = 0 }
-                    )
-                    
-                    // 订单
-                    TabButton(
-                        icon: "doc.text.fill",
-                        title: "订单",
-                        isSelected: selectedTab == 1,
-                        action: { selectedTab = 1 }
-                    )
-                    
-                    // 中间的发布按钮
-                    Button(action: {
-                        // 发布功能
-                    }) {
-                        ZStack {
-                            Circle()
-                                .fill(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [Color.red, Color.red.opacity(0.8)]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
+                // 订单
+                TabButton(
+                    icon: "doc.text.fill",
+                    title: "订单",
+                    isSelected: selectedTab == 1,
+                    action: { selectedTab = 1 }
+                )
+                
+                // 中间的发布按钮
+                Button(action: {
+                    // 发布功能
+                    selectedTab = 2
+                }) {
+                    ZStack {
+                        Circle()
+                            .fill(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [Color.red, Color.red.opacity(0.8)]),
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
                                 )
-                                .frame(width: 56, height: 56)
-                                .shadow(color: Color.red.opacity(0.3), radius: 10, x: 0, y: 4)
-                            
-                            Image(systemName: "plus")
-                                .font(.system(size: 24, weight: .medium))
-                                .foregroundColor(.white)
-                        }
+                            )
+                            .frame(width: 56, height: 56)
+                            .shadow(color: Color.red.opacity(0.3), radius: 10, x: 0, y: 4)
+                        
+                        Image(systemName: "plus")
+                            .font(.system(size: 24, weight: .medium))
+                            .foregroundColor(.white)
                     }
-                    .offset(y: -5)
-                    .scaleEffect(isAnimated ? 1 : 0.01)
-                    .animation(DesignSystem.Animation.spring.delay(0.1), value: isAnimated)
-                    
-                    // 消息
-                    TabButton(
-                        icon: "message.fill",
-                        title: "消息",
-                        isSelected: selectedTab == 2,
-                        action: { selectedTab = 2 }
-                    )
-                    
-                    // 我的
-                    TabButton(
-                        icon: "person.fill",
-                        title: "我的",
-                        isSelected: selectedTab == 3,
-                        action: { selectedTab = 3 }
-                    )
                 }
+                .offset(y: -5)
+                .scaleEffect(isAnimated ? 1 : 0.01)
+                .animation(DesignSystem.Animation.spring.delay(0.1), value: isAnimated)
+                
+                // 消息
+                TabButton(
+                    icon: "message.fill",
+                    title: "消息",
+                    isSelected: selectedTab == 3,
+                    action: { selectedTab = 3 }
+                )
+                
+                // 我的
+                TabButton(
+                    icon: "person.fill",
+                    title: "我的",
+                    isSelected: selectedTab == 4,
+                    action: { selectedTab = 4 }
+                )
             }
-            .frame(height: 83)
         }
-        .ignoresSafeArea(.keyboard)
-        .padding(.bottom, 30) // 调整底部位置，使其上移
+        .frame(height: 83)
         .onAppear {
             withAnimation {
                 isAnimated = true
             }
+        }
+    }
+}
+
+// 各个主要页面的视图
+struct HomePageView: View {
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 0) {
+                    HeaderView()
+                    LocationInputsView()
+                    ServiceCategoriesView()
+                    NewsSectionView()
+                }
+            }
+            .navigationBarHidden(true)
+        }
+    }
+}
+
+struct OrdersView: View {
+    var body: some View {
+        NavigationView {
+            Text("订单页面")
+                .navigationTitle("订单")
+        }
+    }
+}
+
+struct MessagesView: View {
+    var body: some View {
+        NavigationView {
+            Text("消息页面")
+                .navigationTitle("消息")
+        }
+    }
+}
+
+struct ProfileView: View {
+    var body: some View {
+        NavigationView {
+            Text("个人中心")
+                .navigationTitle("我的")
         }
     }
 }
@@ -115,5 +183,5 @@ struct TabButton: View {
 }
 
 #Preview {
-    BottomNavigationView()
+    MainTabView()
 }

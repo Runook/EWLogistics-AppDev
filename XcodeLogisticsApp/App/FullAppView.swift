@@ -24,7 +24,7 @@ struct FullAppView: View {
                 ServiceCategoriesView()
                 NewsSectionView()
                 Spacer()
-                BottomNavigationView()
+                BottomNavigationView(selectedTab: <#Binding<Int>#>)
             }
         }
     }
