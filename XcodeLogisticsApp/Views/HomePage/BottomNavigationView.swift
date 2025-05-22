@@ -49,7 +49,7 @@ struct BottomNavigationView: View {
                             .foregroundColor(.white)
                     }
                 }
-                .offset(y: -20)
+                .offset(y: -5)
                 .scaleEffect(isAnimated ? 1 : 0.01)
                 .animation(DesignSystem.Animation.spring.delay(0.1), value: isAnimated)
                 
