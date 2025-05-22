@@ -51,7 +51,7 @@ struct NewsSectionView: View {
     ]
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 12) {
             // 标题栏
             HStack {
                 Text("资讯中心")
@@ -113,7 +113,7 @@ struct NewsSectionView: View {
                 .tag(2)
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            .frame(height: 220)
+            .frame(height: 180)
         }
         .onAppear {
             withAnimation {
@@ -163,7 +163,7 @@ struct NewsCard: View {
         Button(action: {
             // 新闻点击事件
         }) {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 6) {
                 // 新闻图片
                 ZStack(alignment: .center) {
                     RoundedRectangle(cornerRadius: 12)
@@ -177,19 +177,19 @@ struct NewsCard: View {
                                 endPoint: .bottomTrailing
                             )
                         )
-                        .frame(width: 200, height: 120)
+                        .frame(width: 160, height: 90)
                     
                     if isVideo {
                         Image(systemName: "play.circle.fill")
-                            .font(.system(size: 40))
+                            .font(.system(size: 30))
                             .foregroundColor(.white)
                     } else if isEvent {
                         Image(systemName: "calendar")
-                            .font(.system(size: 40))
+                            .font(.system(size: 30))
                             .foregroundColor(.white)
                     } else {
                         Image(systemName: "newspaper.fill")
-                            .font(.system(size: 40))
+                            .font(.system(size: 30))
                             .foregroundColor(.white)
                     }
                     
@@ -199,40 +199,40 @@ struct NewsCard: View {
                             HStack {
                                 Circle()
                                     .fill(Color.red)
-                                    .frame(width: 8, height: 8)
+                                    .frame(width: 6, height: 6)
                                 Text("直播中")
-                                    .font(.system(size: 12))
+                                    .font(.system(size: 10))
                                     .foregroundColor(.white)
                                 Spacer()
                             }
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 3)
                             .background(Color.black.opacity(0.6))
                         }
                     }
                 }
                 
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 2) {
                     // 标题
                     Text(item.title)
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.system(size: 14, weight: .medium))
                         .foregroundColor(DesignSystem.Colors.Label.primary)
                         .lineLimit(1)
                     
                     // 描述
                     Text(item.description)
-                        .font(.system(size: 14))
+                        .font(.system(size: 12))
                         .foregroundColor(DesignSystem.Colors.Label.secondary)
                         .lineLimit(2)
                     
                     // 日期
                     Text(item.date)
-                        .font(.system(size: 12))
+                        .font(.system(size: 10))
                         .foregroundColor(DesignSystem.Colors.Label.tertiary)
                 }
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 6)
             }
-            .frame(width: 200)
+            .frame(width: 160)
             .background(DesignSystem.Colors.Fill.tertiary)
             .cornerRadius(12)
             .shadow(color: Color.black.opacity(0.05), radius: 5, x: 0, y: 2)
