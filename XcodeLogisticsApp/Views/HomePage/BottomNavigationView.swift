@@ -6,7 +6,7 @@ struct BottomNavigationView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Spacer() // 将导航栏推到底部
+            Spacer()
             
             // 底部导航栏背景
             ZStack {
@@ -43,7 +43,13 @@ struct BottomNavigationView: View {
                     }) {
                         ZStack {
                             Circle()
-                                .fill(Color.red)
+                                .fill(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [Color.red, Color.red.opacity(0.8)]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
                                 .frame(width: 56, height: 56)
                                 .shadow(color: Color.red.opacity(0.3), radius: 10, x: 0, y: 4)
                             
@@ -75,7 +81,8 @@ struct BottomNavigationView: View {
             }
             .frame(height: 83)
         }
-        .ignoresSafeArea(.keyboard) // 忽略键盘
+        .ignoresSafeArea(.keyboard)
+        .padding(.bottom, 30) // 调整底部位置，使其上移
         .onAppear {
             withAnimation {
                 isAnimated = true

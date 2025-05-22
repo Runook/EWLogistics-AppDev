@@ -20,7 +20,13 @@ struct LocationInputsView: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
-            .background(DesignSystem.Colors.Fill.tertiary)
+            .background(
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.red.opacity(0.15), Color.red.opacity(0.05)]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
             .cornerRadius(10)
             .opacity(isAnimated ? 1 : 0)
             .offset(y: isAnimated ? 0 : 10)
@@ -28,7 +34,7 @@ struct LocationInputsView: View {
             // 终点输入框
             HStack(spacing: 12) {
                 Circle()
-                    .fill(Color.red.opacity(0.6))
+                    .fill(Color.red)
                     .frame(width: 8, height: 8)
                 
                 TextField("请输入终点", text: $endLocation)
@@ -37,7 +43,13 @@ struct LocationInputsView: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
-            .background(DesignSystem.Colors.Fill.tertiary)
+            .background(
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.red.opacity(0.15), Color.red.opacity(0.05)]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
             .cornerRadius(10)
             .opacity(isAnimated ? 1 : 0)
             .offset(y: isAnimated ? 0 : 10)
@@ -55,7 +67,13 @@ struct LocationInputsView: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 12)
-                .background(Color.red)
+                .background(
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.red, Color.red.opacity(0.8)]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
                 .cornerRadius(10)
             }
             .opacity(isAnimated ? 1 : 0)

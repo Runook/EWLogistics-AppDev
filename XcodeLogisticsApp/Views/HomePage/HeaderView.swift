@@ -7,6 +7,9 @@ struct HeaderView: View {
     
     var body: some View {
         VStack(spacing: 0) {
+            Color.clear
+                .frame(height: 47) // 为状态栏添加空间
+            
             HStack(spacing: 12) {
                 // 位置按钮
                 Button(action: {
@@ -60,6 +63,7 @@ struct HeaderView: View {
                 alignment: .bottom
             )
         }
+        .background(BlurView(style: .systemThinMaterial))
         .onAppear {
             withAnimation(DesignSystem.Animation.spring) {
                 isAnimated = true
