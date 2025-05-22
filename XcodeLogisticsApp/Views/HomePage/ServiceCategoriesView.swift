@@ -23,9 +23,9 @@ struct ServiceCategoriesView: View {
     ]
     
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 8) {
             // 第一行类别
-            HStack(spacing: 12) {
+            HStack(spacing: 8) {
                 ForEach(0..<row1.count, id: \.self) { index in
                     CategoryItemView(
                         item: row1[index], 
@@ -36,7 +36,7 @@ struct ServiceCategoriesView: View {
             }
             
             // 第二行类别
-            HStack(spacing: 12) {
+            HStack(spacing: 8) {
                 ForEach(0..<row2.count, id: \.self) { index in
                     CategoryItemView(
                         item: row2[index], 
@@ -47,7 +47,7 @@ struct ServiceCategoriesView: View {
             }
             
             // 第三行类别
-            HStack(spacing: 12) {
+            HStack(spacing: 8) {
                 ForEach(0..<row3.count, id: \.self) { index in
                     CategoryItemView(
                         item: row3[index], 
@@ -57,7 +57,7 @@ struct ServiceCategoriesView: View {
                 }
             }
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 16)
         .padding(.top, 32)
         .onAppear {
             withAnimation {
@@ -95,7 +95,7 @@ struct CategoryItemView: View {
                     .minimumScaleFactor(0.8)
                     .padding(.horizontal, 4)
             }
-            .frame(height: 57)
+            .frame(height: 65)
         }
         .buttonStyle(CategoryButtonStyle())
         .opacity(isAnimated ? 1 : 0)

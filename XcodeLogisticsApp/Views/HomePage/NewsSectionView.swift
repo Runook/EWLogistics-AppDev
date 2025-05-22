@@ -2,8 +2,24 @@ import SwiftUI
 
 struct NewsSectionView: View {
     @State private var isAnimated = false
+    @State private var selectedTab = 0
     
-    // 示例新闻数据
+    // 示例数据
+    let eventItems = [
+        NewsItem(
+            title: "物流行业交流会",
+            description: "2025年物流行业发展趋势研讨会",
+            date: "2025-05-21",
+            imageUrl: "event1"
+        ),
+        NewsItem(
+            title: "物流技术展览会",
+            description: "最新物流自动化设备展示",
+            date: "2025-05-20",
+            imageUrl: "event2"
+        )
+    ]
+    
     let newsItems = [
         NewsItem(
             title: "物流行业黑名单更新",
@@ -12,16 +28,25 @@ struct NewsSectionView: View {
             imageUrl: "news1"
         ),
         NewsItem(
-            title: "卡车司机视频直播",
-            description: "最新跨境物流政策解读与分析",
+            title: "最新政策解读",
+            description: "跨境物流新规详解",
             date: "2025-05-20",
             imageUrl: "news2"
+        )
+    ]
+    
+    let videoItems = [
+        NewsItem(
+            title: "卡车司机日常",
+            description: "跨境运输实况直播",
+            date: "直播中",
+            imageUrl: "video1"
         ),
         NewsItem(
-            title: "智慧物流发展前景",
-            description: "人工智能在物流领域的应用展望",
+            title: "仓储管理技巧",
+            description: "专业仓储管理员经验分享",
             date: "2024-03-19",
-            imageUrl: "news3"
+            imageUrl: "video2"
         )
     ]
     
@@ -29,43 +54,91 @@ struct NewsSectionView: View {
         VStack(alignment: .leading, spacing: 16) {
             // 标题栏
             HStack {
-                Text("物流资讯")
+                Text("资讯中心")
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(DesignSystem.Colors.Label.primary)
                 
                 Spacer()
-                
-                Button(action: {
-                    // 更多按钮点击事件
-                }) {
-                    Text("更多")
-                        .font(.system(size: 14))
-                        .foregroundColor(.red)
-                }
             }
             .padding(.horizontal, 20)
             .opacity(isAnimated ? 1 : 0)
             .offset(y: isAnimated ? 0 : 10)
             
-            // 新闻列表
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
-                    ForEach(Array(newsItems.enumerated()), id: \.element.id) { index, item in
-                        NewsCard(item: item)
-                            .opacity(isAnimated ? 1 : 0)
-                            .offset(x: isAnimated ? 0 : 50)
-                            .animation(
-                                DesignSystem.Animation.spring.delay(0.1 * Double(index)),
-                                value: isAnimated
-                            )
-                    }
+            // 分类标签
+            HStack(spacing: 20) {
+                TabButton2(title: "事件论坛", isSelected: selectedTab == 0) {
+                    withAnimation { selectedTab = 0 }
                 }
-                .padding(.horizontal, 20)
+                
+                TabButton2(title: "新闻资讯", isSelected: selectedTab == 1) {
+                    withAnimation { selectedTab = 1 }
+                }
+                
+                TabButton2(title: "视频直播", isSelected: selectedTab == 2) {
+                    withAnimation { selectedTab = 2 }
+                }
             }
+            .padding(.horizontal, 20)
+            
+            // 内容区域
+            TabView(selection: $selectedTab) {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 12) {
+                        ForEach(eventItems) { item in
+                            NewsCard(item: item, isEvent: true)
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                }
+                .tag(0)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 12) {
+                        ForEach(newsItems) { item in
+                            NewsCard(item: item, isEvent: false)
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                }
+                .tag(1)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 12) {
+                        ForEach(videoItems) { item in
+                            NewsCard(item: item, isVideo: true)
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                }
+                .tag(2)
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            .frame(height: 220)
         }
         .onAppear {
             withAnimation {
                 isAnimated = true
+            }
+        }
+    }
+}
+
+// 分类标签按钮
+struct TabButton2: View {
+    let title: String
+    let isSelected: Bool
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 4) {
+                Text(title)
+                    .font(.system(size: 16))
+                    .foregroundColor(isSelected ? .red : DesignSystem.Colors.Label.secondary)
+                
+                Rectangle()
+                    .fill(isSelected ? Color.red : Color.clear)
+                    .frame(height: 2)
             }
         }
     }
@@ -83,6 +156,8 @@ struct NewsItem: Identifiable {
 // 新闻卡片视图
 struct NewsCard: View {
     let item: NewsItem
+    var isEvent: Bool = false
+    var isVideo: Bool = false
     
     var body: some View {
         Button(action: {
@@ -90,38 +165,67 @@ struct NewsCard: View {
         }) {
             VStack(alignment: .leading, spacing: 8) {
                 // 新闻图片
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(
-                        LinearGradient(
-                            gradient: Gradient(colors: [
-                                Color.red.opacity(0.7),
-                                Color.red.opacity(0.3)
-                            ]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
+                ZStack(alignment: .center) {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    Color.red.opacity(0.7),
+                                    Color.red.opacity(0.3)
+                                ]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
                         )
-                    )
-                    .frame(width: 200, height: 120)
-                    .overlay(
+                        .frame(width: 200, height: 120)
+                    
+                    if isVideo {
+                        Image(systemName: "play.circle.fill")
+                            .font(.system(size: 40))
+                            .foregroundColor(.white)
+                    } else if isEvent {
+                        Image(systemName: "calendar")
+                            .font(.system(size: 40))
+                            .foregroundColor(.white)
+                    } else {
                         Image(systemName: "newspaper.fill")
                             .font(.system(size: 40))
-                            .foregroundColor(.white.opacity(0.8))
-                    )
+                            .foregroundColor(.white)
+                    }
+                    
+                    if isVideo && item.date == "直播中" {
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Circle()
+                                    .fill(Color.red)
+                                    .frame(width: 8, height: 8)
+                                Text("直播中")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.white)
+                                Spacer()
+                            }
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color.black.opacity(0.6))
+                        }
+                    }
+                }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    // 新闻标题
+                    // 标题
                     Text(item.title)
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(DesignSystem.Colors.Label.primary)
                         .lineLimit(1)
                     
-                    // 新闻描述
+                    // 描述
                     Text(item.description)
                         .font(.system(size: 14))
                         .foregroundColor(DesignSystem.Colors.Label.secondary)
                         .lineLimit(2)
                     
-                    // 发布日期
+                    // 日期
                     Text(item.date)
                         .font(.system(size: 12))
                         .foregroundColor(DesignSystem.Colors.Label.tertiary)

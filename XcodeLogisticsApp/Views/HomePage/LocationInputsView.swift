@@ -4,6 +4,7 @@ struct LocationInputsView: View {
     @State private var startLocation = ""
     @State private var endLocation = ""
     @State private var isAnimated = false
+    @State private var showCargoDetails = false
     
     var body: some View {
         VStack(spacing: 12) {
@@ -40,6 +41,25 @@ struct LocationInputsView: View {
             .cornerRadius(10)
             .opacity(isAnimated ? 1 : 0)
             .offset(y: isAnimated ? 0 : 10)
+            
+            // 货物详情按钮
+            Button(action: {
+                showCargoDetails = true
+            }) {
+                HStack {
+                    Image(systemName: "cube.box.fill")
+                        .font(.system(size: 16))
+                    Text("货物详情")
+                        .font(.system(size: 16))
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+                .background(Color.red)
+                .cornerRadius(10)
+            }
+            .opacity(isAnimated ? 1 : 0)
+            .offset(y: isAnimated ? 0 : 10)
         }
         .padding(.horizontal, 20)
         .padding(.top, 12)
@@ -47,6 +67,42 @@ struct LocationInputsView: View {
             withAnimation(DesignSystem.Animation.spring) {
                 isAnimated = true
             }
+        }
+        .sheet(isPresented: $showCargoDetails) {
+            CargoDetailsView()
+        }
+    }
+}
+
+// 货物详情视图
+struct CargoDetailsView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                Section(header: Text("基本信息")) {
+                    TextField("货物名称", text: .constant(""))
+                    TextField("货物重量 (kg)", text: .constant(""))
+                    TextField("货物体积 (m³)", text: .constant(""))
+                }
+                
+                Section(header: Text("特殊要求")) {
+                    Toggle("需要冷藏", isOn: .constant(false))
+                    Toggle("易碎品", isOn: .constant(false))
+                    Toggle("危险品", isOn: .constant(false))
+                }
+                
+                Section(header: Text("备注")) {
+                    TextEditor(text: .constant(""))
+                        .frame(height: 100)
+                }
+            }
+            .navigationTitle("货物详情")
+            .navigationBarItems(trailing: Button("完成") {
+                presentationMode.wrappedValue.dismiss()
+            }
+            .foregroundColor(.red))
         }
     }
 }
