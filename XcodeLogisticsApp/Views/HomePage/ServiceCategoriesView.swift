@@ -5,21 +5,21 @@ struct ServiceCategoriesView: View {
     
     // 服务类别数据
     let row1 = [
-        CategoryItem(title: "陆运", color: "red1"),
-        CategoryItem(title: "海运", color: "red2"),
+        CategoryItem(title: "陆运", color: "red3"),
+        CategoryItem(title: "海运", color: "red3"),
         CategoryItem(title: "空运", color: "red3"),
     ]
     
     let row2 = [
-        CategoryItem(title: "多式联运", color: "red2"),
+        CategoryItem(title: "多式联运", color: "red3"),
         CategoryItem(title: "一件代发", color: "red3"),
-        CategoryItem(title: "商家黄页", color: "red1"),
+        CategoryItem(title: "商家黄页", color: "red3"),
     ]
     
     let row3 = [
         CategoryItem(title: "招聘求职", color: "red3"),
-        CategoryItem(title: "物流出租", color: "red1"),
-        CategoryItem(title: "物流售卖", color: "red2"),
+        CategoryItem(title: "物流出租", color: "red3"),
+        CategoryItem(title: "物流售卖", color: "red3"),
     ]
     
     var body: some View {

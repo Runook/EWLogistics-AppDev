@@ -6,15 +6,15 @@ struct NewsSectionView: View {
     // 示例新闻数据
     let newsItems = [
         NewsItem(
-            title: "物流行业最新动态",
-            description: "2024年物流行业发展趋势分析",
-            date: "2024-03-21",
+            title: "物流行业黑名单更新",
+            description: "2025年物流行业失信人员名单",
+            date: "2025-05-21",
             imageUrl: "news1"
         ),
         NewsItem(
-            title: "跨境物流新政策",
+            title: "卡车司机视频直播",
             description: "最新跨境物流政策解读与分析",
-            date: "2024-03-20",
+            date: "2025-05-20",
             imageUrl: "news2"
         ),
         NewsItem(
