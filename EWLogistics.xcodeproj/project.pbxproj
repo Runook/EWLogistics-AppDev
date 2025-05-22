@@ -24,9 +24,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BDF232302DDE183200997537 /* XcodeLogisticsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XcodeLogisticsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDF2323D2DDE183300997537 /* XcodeLogisticsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XcodeLogisticsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BDF232472DDE183300997537 /* XcodeLogisticsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XcodeLogisticsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDF232302DDE183200997537 /* EWLogistics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EWLogistics.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDF2323D2DDE183300997537 /* EWLogisticsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EWLogisticsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDF232472DDE183300997537 /* EWLogisticsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EWLogisticsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -85,9 +85,9 @@
 		BDF232312DDE183200997537 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BDF232302DDE183200997537 /* XcodeLogisticsApp.app */,
-				BDF2323D2DDE183300997537 /* XcodeLogisticsAppTests.xctest */,
-				BDF232472DDE183300997537 /* XcodeLogisticsAppUITests.xctest */,
+				BDF232302DDE183200997537 /* EWLogistics.app */,
+				BDF2323D2DDE183300997537 /* EWLogisticsTests.xctest */,
+				BDF232472DDE183300997537 /* EWLogisticsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,9 +95,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BDF2322F2DDE183200997537 /* XcodeLogisticsApp */ = {
+		BDF2322F2DDE183200997537 /* EWLogistics */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BDF232512DDE183300997537 /* Build configuration list for PBXNativeTarget "XcodeLogisticsApp" */;
+			buildConfigurationList = BDF232512DDE183300997537 /* Build configuration list for PBXNativeTarget "EWLogistics" */;
 			buildPhases = (
 				BDF2322C2DDE183200997537 /* Sources */,
 				BDF2322D2DDE183200997537 /* Frameworks */,
@@ -110,16 +110,16 @@
 			fileSystemSynchronizedGroups = (
 				BDF232322DDE183200997537 /* XcodeLogisticsApp */,
 			);
-			name = XcodeLogisticsApp;
+			name = EWLogistics;
 			packageProductDependencies = (
 			);
 			productName = XcodeLogisticsApp;
-			productReference = BDF232302DDE183200997537 /* XcodeLogisticsApp.app */;
+			productReference = BDF232302DDE183200997537 /* EWLogistics.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BDF2323C2DDE183300997537 /* XcodeLogisticsAppTests */ = {
+		BDF2323C2DDE183300997537 /* EWLogisticsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BDF232542DDE183300997537 /* Build configuration list for PBXNativeTarget "XcodeLogisticsAppTests" */;
+			buildConfigurationList = BDF232542DDE183300997537 /* Build configuration list for PBXNativeTarget "EWLogisticsTests" */;
 			buildPhases = (
 				BDF232392DDE183300997537 /* Sources */,
 				BDF2323A2DDE183300997537 /* Frameworks */,
@@ -133,16 +133,16 @@
 			fileSystemSynchronizedGroups = (
 				BDF232402DDE183300997537 /* XcodeLogisticsAppTests */,
 			);
-			name = XcodeLogisticsAppTests;
+			name = EWLogisticsTests;
 			packageProductDependencies = (
 			);
 			productName = XcodeLogisticsAppTests;
-			productReference = BDF2323D2DDE183300997537 /* XcodeLogisticsAppTests.xctest */;
+			productReference = BDF2323D2DDE183300997537 /* EWLogisticsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		BDF232462DDE183300997537 /* XcodeLogisticsAppUITests */ = {
+		BDF232462DDE183300997537 /* EWLogisticsUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BDF232572DDE183300997537 /* Build configuration list for PBXNativeTarget "XcodeLogisticsAppUITests" */;
+			buildConfigurationList = BDF232572DDE183300997537 /* Build configuration list for PBXNativeTarget "EWLogisticsUITests" */;
 			buildPhases = (
 				BDF232432DDE183300997537 /* Sources */,
 				BDF232442DDE183300997537 /* Frameworks */,
@@ -156,11 +156,11 @@
 			fileSystemSynchronizedGroups = (
 				BDF2324A2DDE183300997537 /* XcodeLogisticsAppUITests */,
 			);
-			name = XcodeLogisticsAppUITests;
+			name = EWLogisticsUITests;
 			packageProductDependencies = (
 			);
 			productName = XcodeLogisticsAppUITests;
-			productReference = BDF232472DDE183300997537 /* XcodeLogisticsAppUITests.xctest */;
+			productReference = BDF232472DDE183300997537 /* EWLogisticsUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -186,7 +186,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BDF2322B2DDE183200997537 /* Build configuration list for PBXProject "XcodeLogisticsApp" */;
+			buildConfigurationList = BDF2322B2DDE183200997537 /* Build configuration list for PBXProject "EWLogistics" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -200,9 +200,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BDF2322F2DDE183200997537 /* XcodeLogisticsApp */,
-				BDF2323C2DDE183300997537 /* XcodeLogisticsAppTests */,
-				BDF232462DDE183300997537 /* XcodeLogisticsAppUITests */,
+				BDF2322F2DDE183200997537 /* EWLogistics */,
+				BDF2323C2DDE183300997537 /* EWLogisticsTests */,
+				BDF232462DDE183300997537 /* EWLogisticsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -258,12 +258,12 @@
 /* Begin PBXTargetDependency section */
 		BDF2323F2DDE183300997537 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BDF2322F2DDE183200997537 /* XcodeLogisticsApp */;
+			target = BDF2322F2DDE183200997537 /* EWLogistics */;
 			targetProxy = BDF2323E2DDE183300997537 /* PBXContainerItemProxy */;
 		};
 		BDF232492DDE183300997537 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BDF2322F2DDE183200997537 /* XcodeLogisticsApp */;
+			target = BDF2322F2DDE183200997537 /* EWLogistics */;
 			targetProxy = BDF232482DDE183300997537 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -456,7 +456,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/XcodeLogisticsApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/XcodeLogisticsApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EWLogistics.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/EWLogistics";
 			};
 			name = Debug;
 		};
@@ -474,7 +474,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/XcodeLogisticsApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/XcodeLogisticsApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EWLogistics.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/EWLogistics";
 			};
 			name = Release;
 		};
@@ -513,7 +513,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BDF2322B2DDE183200997537 /* Build configuration list for PBXProject "XcodeLogisticsApp" */ = {
+		BDF2322B2DDE183200997537 /* Build configuration list for PBXProject "EWLogistics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BDF2324F2DDE183300997537 /* Debug */,
@@ -522,7 +522,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BDF232512DDE183300997537 /* Build configuration list for PBXNativeTarget "XcodeLogisticsApp" */ = {
+		BDF232512DDE183300997537 /* Build configuration list for PBXNativeTarget "EWLogistics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BDF232522DDE183300997537 /* Debug */,
@@ -531,7 +531,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BDF232542DDE183300997537 /* Build configuration list for PBXNativeTarget "XcodeLogisticsAppTests" */ = {
+		BDF232542DDE183300997537 /* Build configuration list for PBXNativeTarget "EWLogisticsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BDF232552DDE183300997537 /* Debug */,
@@ -540,7 +540,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BDF232572DDE183300997537 /* Build configuration list for PBXNativeTarget "XcodeLogisticsAppUITests" */ = {
+		BDF232572DDE183300997537 /* Build configuration list for PBXNativeTarget "EWLogisticsUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BDF232582DDE183300997537 /* Debug */,
