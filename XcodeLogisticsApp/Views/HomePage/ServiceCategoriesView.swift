@@ -87,6 +87,7 @@ struct CategoryItemView: View {
     let index: Int
     let isAnimated: Bool
     @Binding var showTransportService: Bool
+    @State private var isPressed = false
     
     var body: some View {
         Button(action: {
@@ -96,16 +97,16 @@ struct CategoryItemView: View {
         }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(backgroundColor)
+                    .fill(isPressed ? pressedBackgroundColor : backgroundColor)
                 
                 VStack(spacing: 6) {
                     Image(systemName: item.icon)
                         .font(.system(size: 20))
-                        .foregroundColor(textColor)
+                        .foregroundColor(isPressed ? pressedTextColor : textColor)
                     
                     Text(item.title)
                         .font(.system(size: 14))
-                        .foregroundColor(textColor)
+                        .foregroundColor(isPressed ? pressedTextColor : textColor)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .minimumScaleFactor(0.8)
@@ -114,7 +115,7 @@ struct CategoryItemView: View {
             }
             .frame(height: 65)
         }
-        .buttonStyle(CategoryButtonStyle())
+        .buttonStyle(CategoryButtonStyle(isPressed: $isPressed))
         .opacity(isAnimated ? 1 : 0)
         .scaleEffect(isAnimated ? 0.8 : 1)
         .animation(DesignSystem.Animation.spring.delay(0.05 * Double(index)), value: isAnimated)
@@ -134,6 +135,20 @@ struct CategoryItemView: View {
         }
     }
     
+    // 按下时的背景色（更深）
+    var pressedBackgroundColor: Color {
+        switch item.color {
+        case "lightGreen1":
+            return Color(red: 165/255, green: 214/255, blue: 167/255).opacity(0.35)
+        case "lightGreen2":
+            return Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.4)
+        case "lightGreen3":
+            return Color(red: 102/255, green: 187/255, blue: 106/255).opacity(0.45)
+        default:
+            return Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.4)
+        }
+    }
+    
     // 根据颜色名称返回正确的文字色
     var textColor: Color {
         switch item.color {
@@ -147,15 +162,36 @@ struct CategoryItemView: View {
             return Color(red: 76/255, green: 175/255, blue: 80/255)
         }
     }
+    
+    // 按下时的文字色（更深）
+    var pressedTextColor: Color {
+        switch item.color {
+        case "lightGreen1":
+            return Color(red: 76/255, green: 175/255, blue: 80/255)
+        case "lightGreen2":
+            return Color(red: 56/255, green: 142/255, blue: 60/255)
+        case "lightGreen3":
+            return Color(red: 46/255, green: 125/255, blue: 50/255)
+        default:
+            return Color(red: 56/255, green: 142/255, blue: 60/255)
+        }
+    }
 }
 
 // 类别按钮样式
 struct CategoryButtonStyle: ButtonStyle {
+    @Binding var isPressed: Bool
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .shadow(color: Color(red: 102/255, green: 187/255, blue: 106/255).opacity(0.2), radius: 3, x: 0, y: 1)
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
+            .onChange(of: configuration.isPressed) { pressed in
+                withAnimation(.easeInOut(duration: 0.1)) {
+                    isPressed = pressed
+                }
+            }
     }
 }
 
