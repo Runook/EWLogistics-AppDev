@@ -23,7 +23,7 @@ struct MainTabView: View {
             }
             
             BottomNavigationView(selectedTab: $selectedTab)
-                .padding(.bottom, 30)
+                .padding(.bottom, -10)
         }
         .ignoresSafeArea(.keyboard)
     }
