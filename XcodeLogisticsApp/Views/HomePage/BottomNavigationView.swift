@@ -104,7 +104,7 @@ struct BottomNavigationView: View {
                     isSelected: selectedTab == 4,
                     action: { selectedTab = 4 }
                 )
-            }
+                }
         }
         .frame(height: 83)
         .onAppear {
@@ -172,11 +172,11 @@ struct TabButton: View {
                 Image(systemName: icon)
                     .font(.system(size: 22))
                     .foregroundColor(isSelected ? .red : DesignSystem.Colors.Label.tertiary)
-                
-                Text(title)
+                    
+                    Text(title)
                     .font(.system(size: 11))
                     .foregroundColor(isSelected ? .red : DesignSystem.Colors.Label.tertiary)
-            }
+        }
             .frame(maxWidth: .infinity)
         }
     }

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ServiceCategoriesView: View {
     @State private var isAnimated = false
+    @State private var showTransportService = false
     
     // 服务类别数据
     let row1 = [
@@ -23,46 +24,52 @@ struct ServiceCategoriesView: View {
     ]
     
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 0) {
             // 第一行类别
-            HStack(spacing: 8) {
+            HStack(spacing: -10) {
                 ForEach(0..<row1.count, id: \.self) { index in
                     CategoryItemView(
                         item: row1[index], 
                         index: index, 
-                        isAnimated: isAnimated
+                        isAnimated: isAnimated,
+                        showTransportService: $showTransportService
                     )
                 }
             }
             
             // 第二行类别
-            HStack(spacing: 8) {
+            HStack(spacing: -10) {
                 ForEach(0..<row2.count, id: \.self) { index in
                     CategoryItemView(
                         item: row2[index], 
                         index: index + 3, 
-                        isAnimated: isAnimated
+                        isAnimated: isAnimated,
+                        showTransportService: $showTransportService
                     )
                 }
             }
             
             // 第三行类别
-            HStack(spacing: 8) {
+            HStack(spacing: -10) {
                 ForEach(0..<row3.count, id: \.self) { index in
                     CategoryItemView(
                         item: row3[index], 
                         index: index + 6, 
-                        isAnimated: isAnimated
+                        isAnimated: isAnimated,
+                        showTransportService: $showTransportService
                     )
                 }
             }
         }
         .padding(.horizontal, 16)
-        .padding(.top, 32)
+        .padding(.top, 10)
         .onAppear {
             withAnimation {
                 isAnimated = true
             }
+        }
+        .sheet(isPresented: $showTransportService) {
+            TransportServiceView()
         }
     }
 }
@@ -78,10 +85,13 @@ struct CategoryItemView: View {
     let item: CategoryItem
     let index: Int
     let isAnimated: Bool
+    @Binding var showTransportService: Bool
     
     var body: some View {
         Button(action: {
-            // 点击处理（实际应用中添加功能）
+            if item.title == "陆运" {
+                showTransportService = true
+            }
         }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 12)

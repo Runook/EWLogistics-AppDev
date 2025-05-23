@@ -56,13 +56,13 @@ struct NewsSectionView: View {
             HStack {
                 Text("资讯中心")
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(DesignSystem.Colors.Label.primary)
+                .foregroundColor(DesignSystem.Colors.Label.primary)
                 
                 Spacer()
             }
             .padding(.horizontal, 20)
-            .opacity(isAnimated ? 1 : 0)
-            .offset(y: isAnimated ? 0 : 10)
+                .opacity(isAnimated ? 1 : 0)
+                .offset(y: isAnimated ? 0 : 10)
             
             // 分类标签
             HStack(spacing: 20) {
@@ -87,7 +87,7 @@ struct NewsSectionView: View {
                         ForEach(eventItems) { item in
                             NewsCard(item: item, isEvent: true)
                         }
-                    }
+        }
                     .padding(.horizontal, 20)
                 }
                 .tag(0)
@@ -166,16 +166,16 @@ struct NewsCard: View {
             VStack(alignment: .leading, spacing: 6) {
                 // 新闻图片
                 ZStack(alignment: .center) {
-                    RoundedRectangle(cornerRadius: 12)
+                RoundedRectangle(cornerRadius: 12)
                         .fill(
                             LinearGradient(
-                                gradient: Gradient(colors: [
+                gradient: Gradient(colors: [
                                     Color.red.opacity(0.7),
                                     Color.red.opacity(0.3)
-                                ]),
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
                         )
                         .frame(width: 160, height: 90)
                     

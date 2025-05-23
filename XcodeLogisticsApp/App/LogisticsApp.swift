@@ -25,8 +25,8 @@ struct LogisticsApp: App {
     var body: some Scene {
         WindowGroup {
             if authManager.isAuthenticated {
-                FullAppView()
-                    .environmentObject(designSystem)
+            FullAppView()
+                .environmentObject(designSystem)
                     .environmentObject(authManager)
                     .preferredColorScheme(.light)
             } else {

@@ -196,3 +196,4 @@ struct CustomSecureField: View {
         .environmentObject(DesignSystem())
         .environmentObject(AuthenticationManager())
 } 
+ 

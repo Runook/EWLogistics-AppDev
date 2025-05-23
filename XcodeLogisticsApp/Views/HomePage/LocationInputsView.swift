@@ -14,7 +14,7 @@ struct LocationInputsView: View {
                     .fill(Color.red)
                     .frame(width: 8, height: 8)
                 
-                TextField("请输入起点", text: $startLocation)
+                TextField("输入起点[邮编]", text: $startLocation)
                     .font(.system(size: 17))
                     .foregroundColor(DesignSystem.Colors.Label.primary)
             }
@@ -37,7 +37,7 @@ struct LocationInputsView: View {
                     .fill(Color.red)
                     .frame(width: 8, height: 8)
                 
-                TextField("请输入终点", text: $endLocation)
+                TextField("输入终点[邮编]", text: $endLocation)
                     .font(.system(size: 17))
                     .foregroundColor(DesignSystem.Colors.Label.primary)
             }
