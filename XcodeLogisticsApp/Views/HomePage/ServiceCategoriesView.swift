@@ -27,7 +27,7 @@ struct ServiceCategoriesView: View {
     var body: some View {
         VStack(spacing: 8) {
             // 第一行类别
-            HStack(spacing: -10) {
+            HStack(spacing: -8) {
                 ForEach(0..<row1.count, id: \.self) { index in
                     CategoryItemView(
                         item: row1[index], 
@@ -40,7 +40,7 @@ struct ServiceCategoriesView: View {
             }
             
             // 第二行类别
-            HStack(spacing: -10) {
+            HStack(spacing: -8) {
                 ForEach(0..<row2.count, id: \.self) { index in
                     CategoryItemView(
                         item: row2[index], 
@@ -53,7 +53,7 @@ struct ServiceCategoriesView: View {
             }
             
             // 第三行类别
-            HStack(spacing: -10) {
+            HStack(spacing: -8) {
                 ForEach(0..<row3.count, id: \.self) { index in
                     CategoryItemView(
                         item: row3[index], 
@@ -109,21 +109,21 @@ struct CategoryItemView: View {
                 RoundedRectangle(cornerRadius: 25)
                     .fill(isPressed ? pressedBackgroundColor : backgroundColor)
                 
-                VStack(spacing: 8) {
+                VStack(spacing: 10) {
                     Image(systemName: item.icon)
-                        .font(.system(size: 28, weight: .medium))
+                        .font(.system(size: 36, weight: .semibold))
                         .foregroundColor(isPressed ? pressedTextColor : textColor)
                     
                     Text(item.title)
-                        .font(.system(size: 16, weight: .medium))
+                        .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(isPressed ? pressedTextColor : textColor)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .minimumScaleFactor(0.8)
                 }
-                .padding(.horizontal, 6)
+                .padding(.horizontal, 8)
             }
-            .frame(height: 85)
+            .frame(height: 100)
         }
         .buttonStyle(CategoryButtonStyle(isPressed: $isPressed))
         .opacity(isAnimated ? 1 : 0)
