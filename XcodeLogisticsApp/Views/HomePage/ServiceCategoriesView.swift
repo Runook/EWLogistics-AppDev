@@ -3,6 +3,7 @@ import SwiftUI
 struct ServiceCategoriesView: View {
     @State private var isAnimated = false
     @State private var showTransportService = false
+    @State private var showRecruitmentPage = false
     
     // 服务类别数据
     let row1 = [
@@ -32,7 +33,8 @@ struct ServiceCategoriesView: View {
                         item: row1[index], 
                         index: index, 
                         isAnimated: isAnimated,
-                        showTransportService: $showTransportService
+                        showTransportService: $showTransportService,
+                        showRecruitmentPage: $showRecruitmentPage
                     )
                 }
             }
@@ -44,7 +46,8 @@ struct ServiceCategoriesView: View {
                         item: row2[index], 
                         index: index + 3, 
                         isAnimated: isAnimated,
-                        showTransportService: $showTransportService
+                        showTransportService: $showTransportService,
+                        showRecruitmentPage: $showRecruitmentPage
                     )
                 }
             }
@@ -56,7 +59,8 @@ struct ServiceCategoriesView: View {
                         item: row3[index], 
                         index: index + 6, 
                         isAnimated: isAnimated,
-                        showTransportService: $showTransportService
+                        showTransportService: $showTransportService,
+                        showRecruitmentPage: $showRecruitmentPage
                     )
                 }
             }
@@ -70,6 +74,9 @@ struct ServiceCategoriesView: View {
         }
         .sheet(isPresented: $showTransportService) {
             TransportServiceView()
+        }
+        .sheet(isPresented: $showRecruitmentPage) {
+            RecruitmentView()
         }
     }
 }
@@ -87,12 +94,15 @@ struct CategoryItemView: View {
     let index: Int
     let isAnimated: Bool
     @Binding var showTransportService: Bool
+    @Binding var showRecruitmentPage: Bool
     @State private var isPressed = false
     
     var body: some View {
         Button(action: {
             if item.title == "陆运" {
                 showTransportService = true
+            } else if item.title == "招聘求职" {
+                showRecruitmentPage = true
             }
         }) {
             ZStack {
