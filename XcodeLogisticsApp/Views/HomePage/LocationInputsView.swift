@@ -21,12 +21,9 @@ struct LocationInputsView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
             .background(
-                LinearGradient(
-                    gradient: Gradient(colors: [Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.25), Color(red: 165/255, green: 214/255, blue: 167/255).opacity(0.12)]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
+                Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.25)
             )
+
             .cornerRadius(10)
             .opacity(isAnimated ? 1 : 0)
             .offset(y: isAnimated ? 0 : 10)
@@ -44,12 +41,9 @@ struct LocationInputsView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
             .background(
-                LinearGradient(
-                    gradient: Gradient(colors: [Color(red: 102/255, green: 187/255, blue: 106/255).opacity(0.22), Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.1)]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
+                Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.25)
             )
+
             .cornerRadius(10)
             .opacity(isAnimated ? 1 : 0)
             .offset(y: isAnimated ? 0 : 10)
