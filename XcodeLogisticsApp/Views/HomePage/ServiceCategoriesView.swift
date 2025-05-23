@@ -6,21 +6,21 @@ struct ServiceCategoriesView: View {
     
     // 服务类别数据
     let row1 = [
-        CategoryItem(title: "陆运", color: "red3"),
-        CategoryItem(title: "海运", color: "red3"),
-        CategoryItem(title: "空运", color: "red3"),
+        CategoryItem(title: "陆运", color: "lightGreen3"),
+        CategoryItem(title: "海运", color: "lightGreen3"),
+        CategoryItem(title: "空运", color: "lightGreen3"),
     ]
     
     let row2 = [
-        CategoryItem(title: "多式联运", color: "red3"),
-        CategoryItem(title: "一件代发", color: "red3"),
-        CategoryItem(title: "商家黄页", color: "red3"),
+        CategoryItem(title: "多式联运", color: "lightGreen3"),
+        CategoryItem(title: "一件代发", color: "lightGreen3"),
+        CategoryItem(title: "商家黄页", color: "lightGreen3"),
     ]
     
     let row3 = [
-        CategoryItem(title: "招聘求职", color: "red3"),
-        CategoryItem(title: "物流出租", color: "red3"),
-        CategoryItem(title: "物流售卖", color: "red3"),
+        CategoryItem(title: "招聘求职", color: "lightGreen3"),
+        CategoryItem(title: "物流出租", color: "lightGreen3"),
+        CategoryItem(title: "物流售卖", color: "lightGreen3"),
     ]
     
     var body: some View {
@@ -99,7 +99,7 @@ struct CategoryItemView: View {
                 
                 Text(item.title)
                     .font(.system(size: 16))
-                    .foregroundColor(.red)
+                    .foregroundColor(textColor)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
                     .minimumScaleFactor(0.8)
@@ -116,14 +116,28 @@ struct CategoryItemView: View {
     // 根据颜色名称返回正确的背景色
     var backgroundColor: Color {
         switch item.color {
-        case "red1":
-            return Color.red.opacity(0.08)
-        case "red2":
-            return Color.red.opacity(0.12)
-        case "red3":
-            return Color.red.opacity(0.16)
+        case "lightGreen1":
+            return Color(red: 165/255, green: 214/255, blue: 167/255).opacity(0.18)
+        case "lightGreen2":
+            return Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.22)
+        case "lightGreen3":
+            return Color(red: 102/255, green: 187/255, blue: 106/255).opacity(0.25)
         default:
-            return Color.red.opacity(0.1)
+            return Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.2)
+        }
+    }
+    
+    // 根据颜色名称返回正确的文字色
+    var textColor: Color {
+        switch item.color {
+        case "lightGreen1":
+            return Color(red: 102/255, green: 187/255, blue: 106/255)
+        case "lightGreen2":
+            return Color(red: 76/255, green: 175/255, blue: 80/255)
+        case "lightGreen3":
+            return Color(red: 56/255, green: 142/255, blue: 60/255)
+        default:
+            return Color(red: 76/255, green: 175/255, blue: 80/255)
         }
     }
 }
@@ -132,7 +146,7 @@ struct CategoryItemView: View {
 struct CategoryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .shadow(color: Color.red.opacity(0.1), radius: 3, x: 0, y: 1)
+            .shadow(color: Color(red: 102/255, green: 187/255, blue: 106/255).opacity(0.2), radius: 3, x: 0, y: 1)
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: configuration.isPressed)
     }

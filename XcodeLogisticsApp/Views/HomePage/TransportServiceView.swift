@@ -27,7 +27,7 @@ struct TransportServiceView: View {
             .padding(.vertical, 12)
             .background(
                 LinearGradient(
-                    gradient: Gradient(colors: [Color.red.opacity(0.15), Color.red.opacity(0.05)]),
+                    gradient: Gradient(colors: [Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.25), Color(red: 165/255, green: 214/255, blue: 167/255).opacity(0.12)]),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )

@@ -134,10 +134,10 @@ struct TabButton2: View {
             VStack(spacing: 4) {
                 Text(title)
                     .font(.system(size: 16))
-                    .foregroundColor(isSelected ? .red : DesignSystem.Colors.Label.secondary)
+                    .foregroundColor(isSelected ? Color(red: 76/255, green: 175/255, blue: 80/255) : DesignSystem.Colors.Label.secondary)
                 
                 Rectangle()
-                    .fill(isSelected ? Color.red : Color.clear)
+                    .fill(isSelected ? Color(red: 76/255, green: 175/255, blue: 80/255) : Color.clear)
                     .frame(height: 2)
             }
         }
@@ -170,8 +170,8 @@ struct NewsCard: View {
                         .fill(
                             LinearGradient(
                 gradient: Gradient(colors: [
-                                    Color.red.opacity(0.7),
-                                    Color.red.opacity(0.3)
+                                    Color(red: 102/255, green: 187/255, blue: 106/255).opacity(0.9),
+                                    Color(red: 165/255, green: 214/255, blue: 167/255).opacity(0.5)
                 ]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -198,7 +198,7 @@ struct NewsCard: View {
                             Spacer()
                             HStack {
                                 Circle()
-                                    .fill(Color.red)
+                                    .fill(Color(red: 255/255, green: 59/255, blue: 48/255))
                                     .frame(width: 6, height: 6)
                                 Text("直播中")
                                     .font(.system(size: 10))

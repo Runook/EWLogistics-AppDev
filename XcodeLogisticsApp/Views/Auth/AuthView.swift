@@ -16,7 +16,7 @@ struct AuthView: View {
         ZStack {
             // 背景
             LinearGradient(
-                gradient: Gradient(colors: [Color.red.opacity(0.2), Color.white]),
+                gradient: Gradient(colors: [Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.3), Color.white]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -29,7 +29,7 @@ struct AuthView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 80, height: 80)
-                        .foregroundColor(.red)
+                        .foregroundColor(Color(red: 76/255, green: 175/255, blue: 80/255))
                         .padding(.top, 50)
                     
                     // 标题
@@ -104,7 +104,13 @@ struct AuthView: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.red)
+                            .background(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [Color(red: 76/255, green: 175/255, blue: 80/255), Color(red: 56/255, green: 142/255, blue: 60/255)]),
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
                             .cornerRadius(DesignSystem.Layout.CornerRadius.button)
                             .scaleEffect(isButtonPressed ? 0.95 : 1.0)
                     }
@@ -117,7 +123,7 @@ struct AuthView: View {
                         Button("忘记密码？") {
                             // TODO: 实现忘记密码逻辑
                         }
-                        .foregroundColor(.red)
+                        .foregroundColor(Color(red: 76/255, green: 175/255, blue: 80/255))
                     }
                     
                     Spacer()

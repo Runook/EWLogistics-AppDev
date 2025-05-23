@@ -18,7 +18,7 @@ struct HeaderView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "mappin")
                             .font(.system(size: 16))
-                            .foregroundColor(.red)
+                            .foregroundColor(Color(red: 76/255, green: 175/255, blue: 80/255))
                         
                         Text("定位地址")
                             .font(.system(size: 17))
@@ -27,7 +27,7 @@ struct HeaderView: View {
                     }
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
-                    .background(Color.red.opacity(0.1))
+                    .background(Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.2))
                     .cornerRadius(10)
                     .contentShape(Rectangle())
                 }
@@ -37,7 +37,7 @@ struct HeaderView: View {
                 HStack(spacing: 6) {
                     Image(systemName: "magnifyingglass")
                         .font(.system(size: 14))
-                        .foregroundColor(Color.red.opacity(0.6))
+                        .foregroundColor(Color(red: 102/255, green: 187/255, blue: 106/255).opacity(0.8))
                     
                     TextField("搜索栏", text: $searchText)
                         .font(.system(size: 17))
@@ -83,7 +83,7 @@ struct LocationPickerView: View {
             .navigationBarItems(trailing: Button("完成") {
                 presentationMode.wrappedValue.dismiss()
             }
-            .foregroundColor(.red))
+            .foregroundColor(Color(red: 76/255, green: 175/255, blue: 80/255)))
         }
     }
 }

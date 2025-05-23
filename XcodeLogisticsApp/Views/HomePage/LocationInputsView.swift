@@ -11,7 +11,7 @@ struct LocationInputsView: View {
             // 起点输入框
             HStack(spacing: 12) {
                 Circle()
-                    .fill(Color.red)
+                    .fill(Color(red: 102/255, green: 187/255, blue: 106/255))
                     .frame(width: 8, height: 8)
                 
                 TextField("输入起点[邮编]", text: $startLocation)
@@ -22,7 +22,7 @@ struct LocationInputsView: View {
             .padding(.vertical, 12)
             .background(
                 LinearGradient(
-                    gradient: Gradient(colors: [Color.red.opacity(0.15), Color.red.opacity(0.05)]),
+                    gradient: Gradient(colors: [Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.25), Color(red: 165/255, green: 214/255, blue: 167/255).opacity(0.12)]),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
@@ -34,7 +34,7 @@ struct LocationInputsView: View {
             // 终点输入框
             HStack(spacing: 12) {
                 Circle()
-                    .fill(Color.red)
+                    .fill(Color(red: 76/255, green: 175/255, blue: 80/255))
                     .frame(width: 8, height: 8)
                 
                 TextField("输入终点[邮编]", text: $endLocation)
@@ -45,7 +45,7 @@ struct LocationInputsView: View {
             .padding(.vertical, 12)
             .background(
                 LinearGradient(
-                    gradient: Gradient(colors: [Color.red.opacity(0.15), Color.red.opacity(0.05)]),
+                    gradient: Gradient(colors: [Color(red: 102/255, green: 187/255, blue: 106/255).opacity(0.22), Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.1)]),
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
@@ -69,7 +69,7 @@ struct LocationInputsView: View {
                 .padding(.vertical, 12)
                 .background(
                     LinearGradient(
-                        gradient: Gradient(colors: [Color.red, Color.red.opacity(0.8)]),
+                        gradient: Gradient(colors: [Color(red: 76/255, green: 175/255, blue: 80/255), Color(red: 56/255, green: 142/255, blue: 60/255)]),
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
@@ -120,7 +120,7 @@ struct CargoDetailsView: View {
             .navigationBarItems(trailing: Button("完成") {
                 presentationMode.wrappedValue.dismiss()
             }
-            .foregroundColor(.red))
+            .foregroundColor(Color(red: 76/255, green: 175/255, blue: 80/255)))
         }
     }
 }

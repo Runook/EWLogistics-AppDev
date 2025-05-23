@@ -13,7 +13,7 @@ struct FullAppView: View {
         ZStack {
             // 背景渐变
             LinearGradient(
-                gradient: Gradient(colors: [Color.red.opacity(0.2), Color.white]),
+                gradient: Gradient(colors: [Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.3), Color.white]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )

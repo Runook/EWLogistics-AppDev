@@ -72,13 +72,13 @@ struct BottomNavigationView: View {
                         Circle()
                             .fill(
                                 LinearGradient(
-                                    gradient: Gradient(colors: [Color.red, Color.red.opacity(0.8)]),
+                                    gradient: Gradient(colors: [Color(red: 76/255, green: 175/255, blue: 80/255), Color(red: 56/255, green: 142/255, blue: 60/255)]),
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
                             )
                             .frame(width: 56, height: 56)
-                            .shadow(color: Color.red.opacity(0.3), radius: 10, x: 0, y: 4)
+                            .shadow(color: Color(red: 102/255, green: 187/255, blue: 106/255).opacity(0.5), radius: 10, x: 0, y: 4)
                         
                         Image(systemName: "plus")
                             .font(.system(size: 24, weight: .medium))
@@ -104,7 +104,7 @@ struct BottomNavigationView: View {
                     isSelected: selectedTab == 4,
                     action: { selectedTab = 4 }
                 )
-                }
+            }
         }
         .frame(height: 83)
         .onAppear {
@@ -171,11 +171,11 @@ struct TabButton: View {
             VStack(spacing: 4) {
                 Image(systemName: icon)
                     .font(.system(size: 22))
-                    .foregroundColor(isSelected ? .red : DesignSystem.Colors.Label.tertiary)
+                    .foregroundColor(isSelected ? Color(red: 76/255, green: 175/255, blue: 80/255) : DesignSystem.Colors.Label.tertiary)
                     
                     Text(title)
                     .font(.system(size: 11))
-                    .foregroundColor(isSelected ? .red : DesignSystem.Colors.Label.tertiary)
+                    .foregroundColor(isSelected ? Color(red: 76/255, green: 175/255, blue: 80/255) : DesignSystem.Colors.Label.tertiary)
         }
             .frame(maxWidth: .infinity)
         }
