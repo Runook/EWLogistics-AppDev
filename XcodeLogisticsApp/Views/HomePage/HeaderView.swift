@@ -52,18 +52,9 @@ struct HeaderView: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
-            .background(
-                BlurView(style: .systemThinMaterial)
-            )
-            .overlay(
-                Rectangle()
-                    .frame(height: 0.5)
-                    .foregroundColor(DesignSystem.Colors.separator)
-                    .opacity(0.8),
-                alignment: .bottom
-            )
+
         }
-        .background(BlurView(style: .systemThinMaterial))
+
         .onAppear {
             withAnimation(DesignSystem.Animation.spring) {
                 isAnimated = true
