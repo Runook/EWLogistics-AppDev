@@ -85,6 +85,12 @@ struct RecruitmentView: View {
             filtered = filtered.filter { $0.jobType == targetType }
         }
         
+        // 按地区筛选
+        if selectedRegion > 0 {
+            let targetRegion = regions[selectedRegion]
+            filtered = filtered.filter { $0.location.contains(targetRegion) }
+        }
+        
         // 按搜索文本筛选
         if !searchText.isEmpty {
             filtered = filtered.filter { 
@@ -179,18 +185,44 @@ struct RecruitmentView: View {
                 .padding(.vertical, 12)
                 
                 // 筛选标签
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 12) {
-                        // 职位类型筛选
-                        ForEach(0..<jobTypes.count, id: \.self) { index in
-                            FilterTag(
-                                title: jobTypes[index],
-                                isSelected: selectedJobType == index,
-                                action: { selectedJobType = index }
-                            )
+                VStack(spacing: 8) {
+                    // 职位类型筛选
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 12) {
+                            Text("职位:")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(DesignSystem.Colors.Label.secondary)
+                                .padding(.leading, 16)
+                            
+                            ForEach(0..<jobTypes.count, id: \.self) { index in
+                                FilterTag(
+                                    title: jobTypes[index],
+                                    isSelected: selectedJobType == index,
+                                    action: { selectedJobType = index }
+                                )
+                            }
                         }
+                        .padding(.horizontal, 16)
                     }
-                    .padding(.horizontal, 16)
+                    
+                    // 地区筛选
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 12) {
+                            Text("地区:")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(DesignSystem.Colors.Label.secondary)
+                                .padding(.leading, 16)
+                            
+                            ForEach(0..<regions.count, id: \.self) { index in
+                                FilterTag(
+                                    title: regions[index],
+                                    isSelected: selectedRegion == index,
+                                    action: { selectedRegion = index }
+                                )
+                            }
+                        }
+                        .padding(.horizontal, 16)
+                    }
                 }
                 .padding(.vertical, 8)
                 .opacity(isAnimated ? 1 : 0)
@@ -248,8 +280,7 @@ struct FilterTag: View {
         Button(action: action) {
             Text(title)
                 .font(.system(size: 14, weight: .medium))
-                .foregroundColor(isSelected ? .white : .black)
-
+                .foregroundColor(isSelected ? .white : Color(red: 76/255, green: 175/255, blue: 80/255))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
                 .background(
