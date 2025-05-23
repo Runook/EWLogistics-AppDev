@@ -306,7 +306,8 @@ struct CategoryTag: View {
         Button(action: action) {
             Text(title)
                 .font(.system(size: 14, weight: .medium))
-                .foregroundColor(isSelected ? .white : Color(red: 76/255, green: 175/255, blue: 80/255))
+                .foregroundColor(isSelected ? .white : .black)
+
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
                 .background(
