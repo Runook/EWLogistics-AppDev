@@ -96,7 +96,7 @@ struct CategoryItemView: View {
             }
         }) {
             ZStack {
-                RoundedRectangle(cornerRadius: 12)
+                RoundedRectangle(cornerRadius: 25)
                     .fill(isPressed ? pressedBackgroundColor : backgroundColor)
                 
                 VStack(spacing: 6) {

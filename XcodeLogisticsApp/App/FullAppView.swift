@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FullAppView: View {
-    @State private var selectedTab: Int = 0
     var body: some View {
         ZStack {
             // 背景渐变
@@ -19,14 +18,7 @@ struct FullAppView: View {
             )
             .ignoresSafeArea()
             
-            VStack(spacing: 0) {
-                HeaderView()
-                LocationInputsView()
-                ServiceCategoriesView()
-                NewsSectionView()
-                Spacer()
-                BottomNavigationView(selectedTab: $selectedTab)
-            }
+            MainTabView()
         }
     }
 }
