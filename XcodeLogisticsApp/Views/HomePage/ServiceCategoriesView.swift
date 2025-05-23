@@ -25,9 +25,9 @@ struct ServiceCategoriesView: View {
     ]
     
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: -8) {
             // 第一行类别
-            HStack(spacing: -8) {
+            HStack(spacing: -15) {
                 ForEach(0..<row1.count, id: \.self) { index in
                     CategoryItemView(
                         item: row1[index], 
@@ -40,7 +40,7 @@ struct ServiceCategoriesView: View {
             }
             
             // 第二行类别
-            HStack(spacing: -8) {
+            HStack(spacing: -15) {
                 ForEach(0..<row2.count, id: \.self) { index in
                     CategoryItemView(
                         item: row2[index], 
@@ -53,7 +53,7 @@ struct ServiceCategoriesView: View {
             }
             
             // 第三行类别
-            HStack(spacing: -8) {
+            HStack(spacing: -15) {
                 ForEach(0..<row3.count, id: \.self) { index in
                     CategoryItemView(
                         item: row3[index], 
