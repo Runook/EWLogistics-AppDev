@@ -223,12 +223,9 @@ struct MessagesView: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 10)
                     .background(
-                        LinearGradient(
-                            gradient: Gradient(colors: [Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.15), Color(red: 165/255, green: 214/255, blue: 167/255).opacity(0.08)]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
+                        Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.25)
                     )
+
                     .cornerRadius(12)
                 }
                 .padding(.horizontal, 16)
@@ -345,11 +342,7 @@ struct MessageRow: View {
                 ZStack {
                     Circle()
                         .fill(
-                            LinearGradient(
-                                gradient: Gradient(colors: [Color(red: 102/255, green: 187/255, blue: 106/255).opacity(0.8), Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.6)]),
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
+                            Color(red: 76/255, green: 175/255, blue: 80/255)
                         )
                         .frame(width: 50, height: 50)
                     
