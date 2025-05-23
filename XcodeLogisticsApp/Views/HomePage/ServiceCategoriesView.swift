@@ -25,7 +25,7 @@ struct ServiceCategoriesView: View {
     ]
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 8) {
             // 第一行类别
             HStack(spacing: -10) {
                 ForEach(0..<row1.count, id: \.self) { index in
@@ -109,21 +109,21 @@ struct CategoryItemView: View {
                 RoundedRectangle(cornerRadius: 25)
                     .fill(isPressed ? pressedBackgroundColor : backgroundColor)
                 
-                VStack(spacing: 6) {
+                VStack(spacing: 8) {
                     Image(systemName: item.icon)
-                        .font(.system(size: 20))
+                        .font(.system(size: 28, weight: .medium))
                         .foregroundColor(isPressed ? pressedTextColor : textColor)
                     
                     Text(item.title)
-                        .font(.system(size: 14))
+                        .font(.system(size: 16, weight: .medium))
                         .foregroundColor(isPressed ? pressedTextColor : textColor)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .minimumScaleFactor(0.8)
                 }
-                .padding(.horizontal, 4)
+                .padding(.horizontal, 6)
             }
-            .frame(height: 65)
+            .frame(height: 85)
         }
         .buttonStyle(CategoryButtonStyle(isPressed: $isPressed))
         .opacity(isAnimated ? 1 : 0)
@@ -133,58 +133,26 @@ struct CategoryItemView: View {
     
     // 根据颜色名称返回正确的背景色
     var backgroundColor: Color {
-        switch item.color {
-        case "lightGreen1":
-            return Color(red: 165/255, green: 214/255, blue: 167/255).opacity(0.18)
-        case "lightGreen2":
-            return Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.22)
-        case "lightGreen3":
-            return Color(red: 102/255, green: 187/255, blue: 106/255).opacity(0.25)
-        default:
-            return Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.2)
-        }
+        // 使用深亮绿色，像高速公路标志一样醒目
+        return Color(red: 34/255, green: 139/255, blue: 34/255) // 森林绿色
     }
     
     // 按下时的背景色（更深）
     var pressedBackgroundColor: Color {
-        switch item.color {
-        case "lightGreen1":
-            return Color(red: 165/255, green: 214/255, blue: 167/255).opacity(0.35)
-        case "lightGreen2":
-            return Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.4)
-        case "lightGreen3":
-            return Color(red: 102/255, green: 187/255, blue: 106/255).opacity(0.45)
-        default:
-            return Color(red: 129/255, green: 199/255, blue: 132/255).opacity(0.4)
-        }
+        // 按下时使用更深的绿色
+        return Color(red: 25/255, green: 100/255, blue: 25/255) // 更深的森林绿色
     }
     
     // 根据颜色名称返回正确的文字色
     var textColor: Color {
-        switch item.color {
-        case "lightGreen1":
-            return Color(red: 102/255, green: 187/255, blue: 106/255)
-        case "lightGreen2":
-            return Color(red: 76/255, green: 175/255, blue: 80/255)
-        case "lightGreen3":
-            return Color(red: 56/255, green: 142/255, blue: 60/255)
-        default:
-            return Color(red: 76/255, green: 175/255, blue: 80/255)
-        }
+        // 使用白色，确保在绿色背景上清晰可见
+        return Color.white
     }
     
-    // 按下时的文字色（更深）
+    // 按下时的文字色（保持白色）
     var pressedTextColor: Color {
-        switch item.color {
-        case "lightGreen1":
-            return Color(red: 76/255, green: 175/255, blue: 80/255)
-        case "lightGreen2":
-            return Color(red: 56/255, green: 142/255, blue: 60/255)
-        case "lightGreen3":
-            return Color(red: 46/255, green: 125/255, blue: 50/255)
-        default:
-            return Color(red: 56/255, green: 142/255, blue: 60/255)
-        }
+        // 按下时保持白色，稍微透明
+        return Color.white.opacity(0.9)
     }
 }
 
