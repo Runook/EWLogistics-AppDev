@@ -6,21 +6,21 @@ struct ServiceCategoriesView: View {
     
     // 服务类别数据
     let row1 = [
-        CategoryItem(title: "陆运", color: "lightGreen3"),
-        CategoryItem(title: "海运", color: "lightGreen3"),
-        CategoryItem(title: "空运", color: "lightGreen3"),
+        CategoryItem(title: "陆运", color: "lightGreen3", icon: "truck.box.fill"),
+        CategoryItem(title: "海运", color: "lightGreen3", icon: "ferry.fill"),
+        CategoryItem(title: "空运", color: "lightGreen3", icon: "airplane"),
     ]
     
     let row2 = [
-        CategoryItem(title: "多式联运", color: "lightGreen3"),
-        CategoryItem(title: "一件代发", color: "lightGreen3"),
-        CategoryItem(title: "商家黄页", color: "lightGreen3"),
+        CategoryItem(title: "多式联运", color: "lightGreen3", icon: "arrow.triangle.swap"),
+        CategoryItem(title: "一件代发", color: "lightGreen3", icon: "shippingbox.fill"),
+        CategoryItem(title: "商家黄页", color: "lightGreen3", icon: "person.2.fill"),
     ]
     
     let row3 = [
-        CategoryItem(title: "招聘求职", color: "lightGreen3"),
-        CategoryItem(title: "物流出租", color: "lightGreen3"),
-        CategoryItem(title: "物流售卖", color: "lightGreen3"),
+        CategoryItem(title: "招聘求职", color: "lightGreen3", icon: "person.badge.plus.fill"),
+        CategoryItem(title: "物流出租", color: "lightGreen3", icon: "house.fill"),
+        CategoryItem(title: "物流售卖", color: "lightGreen3", icon: "cart.fill"),
     ]
     
     var body: some View {
@@ -78,6 +78,7 @@ struct ServiceCategoriesView: View {
 struct CategoryItem {
     let title: String
     let color: String
+    let icon: String
 }
 
 // 类别项目视图
@@ -97,13 +98,19 @@ struct CategoryItemView: View {
                 RoundedRectangle(cornerRadius: 12)
                     .fill(backgroundColor)
                 
-                Text(item.title)
-                    .font(.system(size: 16))
-                    .foregroundColor(textColor)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.8)
-                    .padding(.horizontal, 4)
+                VStack(spacing: 6) {
+                    Image(systemName: item.icon)
+                        .font(.system(size: 20))
+                        .foregroundColor(textColor)
+                    
+                    Text(item.title)
+                        .font(.system(size: 14))
+                        .foregroundColor(textColor)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.8)
+                }
+                .padding(.horizontal, 4)
             }
             .frame(height: 65)
         }
