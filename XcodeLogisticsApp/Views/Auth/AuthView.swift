@@ -86,6 +86,16 @@ struct AuthView: View {
                         Text(errorMessage)
                             .foregroundColor(.red)
                             .font(.caption)
+                            .padding(.horizontal, 20)
+                    }
+                    
+                    // Cognito错误信息显示
+                    if authManager.showError {
+                        Text(authManager.errorMessage)
+                            .foregroundColor(authManager.errorMessage.contains("🎉") ? .green : .red)
+                            .font(.caption)
+                            .padding(.horizontal, 20)
+                            .multilineTextAlignment(.center)
                     }
                     
                     // 主按钮
@@ -117,6 +127,66 @@ struct AuthView: View {
                     .padding(.horizontal, 20)
                     .appleButton()
                     .animation(DesignSystem.Animation.spring, value: isButtonPressed)
+                    
+                    // 分隔线和AWS Cognito登录
+                    VStack(spacing: 15) {
+                        HStack {
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.3))
+                                .frame(height: 1)
+                            Text("或")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.3))
+                                .frame(height: 1)
+                        }
+                        .padding(.horizontal, 20)
+                        
+                        // AWS Cognito登录按钮
+                        Button(action: {
+                            print("🔘 AWS Cognito button tapped - isLogin: \(isLogin)")
+                            if isLogin {
+                                authManager.loginWithCognito()
+                            } else {
+                                authManager.registerWithCognito()
+                            }
+                        }) {
+                            HStack {
+                                Image(systemName: "lock.shield")
+                                    .font(.system(size: 16))
+                                Text(isLogin ? "使用 AWS 登录" : "使用 AWS 注册")
+                                    .fontWeight(.medium)
+                            }
+                            .foregroundColor(Color(red: 76/255, green: 175/255, blue: 80/255))
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: DesignSystem.Layout.CornerRadius.button)
+                                    .stroke(Color(red: 76/255, green: 175/255, blue: 80/255), lineWidth: 1.5)
+                            )
+                            .cornerRadius(DesignSystem.Layout.CornerRadius.button)
+                        }
+                        .padding(.horizontal, 20)
+                        
+                        // AWS Cognito诊断按钮
+                        Button(action: {
+                            authManager.printDiagnostics()
+                        }) {
+                            HStack {
+                                Image(systemName: "wrench.and.screwdriver")
+                                    .font(.system(size: 14))
+                                Text("AWS 诊断")
+                                    .font(.caption)
+                            }
+                            .foregroundColor(.gray)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(Color.gray.opacity(0.1))
+                            .cornerRadius(8)
+                        }
+                    }
                     
                     if isLogin {
                         // 忘记密码按钮（仅登录时显示）

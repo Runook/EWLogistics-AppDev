@@ -24,6 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BD46BF492DE75D23009D2EC2 /* ------Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "------Info.plist"; sourceTree = "<group>"; };
 		BDF232302DDE183200997537 /* 东西方物流.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "东西方物流.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF2323D2DDE183300997537 /* 东西方物流Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "东西方物流Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF232472DDE183300997537 /* 东西方物流UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "东西方物流UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +76,7 @@
 		BDF232272DDE183200997537 = {
 			isa = PBXGroup;
 			children = (
+				BD46BF492DE75D23009D2EC2 /* ------Info.plist */,
 				BDF232322DDE183200997537 /* XcodeLogisticsApp */,
 				BDF232402DDE183300997537 /* XcodeLogisticsAppTests */,
 				BDF2324A2DDE183300997537 /* XcodeLogisticsAppUITests */,
@@ -397,6 +399,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "------Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -424,6 +427,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "------Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
