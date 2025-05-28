@@ -13,16 +13,45 @@ struct PostLoad {
     let description: String
     let postedDate: String
     let contactName: String
+    let equipmentType: String // 车型要求
+    let cargoType: String // 货物类型
+    let distance: String // 距离
+    let urgency: String // 紧急程度
+    let loadingType: String // 装卸类型
+    let paymentTerms: String // 支付条件
+    let priceValue: Double // 价格数值（用于筛选）
+    let distanceValue: Double // 距离数值（用于筛选）
 }
 
 struct TransportServiceView: View {
     @State private var searchText = ""
     @State private var selectedCarrier = "全部"
+    @State private var selectedEquipment = "全部"
+    @State private var selectedCargoType = "全部"
+    @State private var selectedDistance = "全部"
+    @State private var selectedUrgency = "全部"
+    @State private var priceRange = "全部"
     @State private var isAnimated = false
     @State private var showPostForm = false
+    @State private var showAdvancedFilters = false
     
     // 运输商筛选选项
     let carriers = ["全部", "AMAZON", "WALMART", "FEDEX", "UPS", "USPS", "4PX", "USKY", "WAYFAIR", "NEWEGG", "SHEIN", "TIKTOK", "TEMU"]
+    
+    // 车型筛选选项
+    let equipmentTypes = ["全部", "干货车", "冷藏车", "平板车", "危险品车", "集装箱车", "小货车", "大货车"]
+    
+    // 货物类型选项
+    let cargoTypes = ["全部", "电子产品", "食品饮料", "化工用品", "机械设备", "日用百货", "服装纺织", "医疗用品", "汽车配件"]
+    
+    // 距离选项
+    let distances = ["全部", "同城", "短途(<200mi)", "中途(200-500mi)", "长途(>500mi)"]
+    
+    // 紧急程度选项
+    let urgencies = ["全部", "紧急", "标准", "灵活"]
+    
+    // 价格区间选项
+    let priceRanges = ["全部", "$0-500", "$500-1000", "$1000-2000", "$2000-5000", "$5000+"]
     
     // 模拟货运订单数据
     let postLoads: [PostLoad] = [
@@ -36,7 +65,15 @@ struct TransportServiceView: View {
             deadline: "2024-01-15",
             description: "需要运输电子产品，要求温控车厢",
             postedDate: "2024-01-05",
-            contactName: "张先生"
+            contactName: "张先生",
+            equipmentType: "冷藏车",
+            cargoType: "电子产品",
+            distance: "2,789 mi",
+            urgency: "标准",
+            loadingType: "机械装卸",
+            paymentTerms: "30天账期",
+            priceValue: 3500,
+            distanceValue: 2789
         ),
         PostLoad(
             title: "芝加哥到迈阿密零担运输",
@@ -48,7 +85,15 @@ struct TransportServiceView: View {
             deadline: "2024-01-18",
             description: "日用品运输，包装良好",
             postedDate: "2024-01-06",
-            contactName: "李女士"
+            contactName: "李女士",
+            equipmentType: "干货车",
+            cargoType: "日用百货",
+            distance: "1,377 mi",
+            urgency: "标准",
+            loadingType: "人工装卸",
+            paymentTerms: "现金支付",
+            priceValue: 1200,
+            distanceValue: 1377
         ),
         PostLoad(
             title: "西雅图到丹佛快递运输",
@@ -60,7 +105,15 @@ struct TransportServiceView: View {
             deadline: "2024-01-12",
             description: "紧急医疗用品，优先配送",
             postedDate: "2024-01-07",
-            contactName: "王医生"
+            contactName: "王医生",
+            equipmentType: "小货车",
+            cargoType: "医疗用品",
+            distance: "1,318 mi",
+            urgency: "紧急",
+            loadingType: "人工装卸",
+            paymentTerms: "预付款",
+            priceValue: 800,
+            distanceValue: 1318
         ),
         PostLoad(
             title: "达拉斯到休斯顿专线运输",
@@ -72,7 +125,15 @@ struct TransportServiceView: View {
             deadline: "2024-01-20",
             description: "工业设备运输，需要专业装卸",
             postedDate: "2024-01-08",
-            contactName: "赵经理"
+            contactName: "赵经理",
+            equipmentType: "平板车",
+            cargoType: "机械设备",
+            distance: "239 mi",
+            urgency: "标准",
+            loadingType: "机械装卸",
+            paymentTerms: "15天账期",
+            priceValue: 900,
+            distanceValue: 239
         ),
         PostLoad(
             title: "旧金山到拉斯维加斯小件运输",
@@ -84,7 +145,15 @@ struct TransportServiceView: View {
             deadline: "2024-01-16",
             description: "文件和小包裹运输",
             postedDate: "2024-01-09",
-            contactName: "陈秘书"
+            contactName: "陈秘书",
+            equipmentType: "小货车",
+            cargoType: "日用百货",
+            distance: "570 mi",
+            urgency: "灵活",
+            loadingType: "人工装卸",
+            paymentTerms: "现金支付",
+            priceValue: 350,
+            distanceValue: 570
         ),
         PostLoad(
             title: "波士顿到华盛顿跨境运输",
@@ -96,7 +165,55 @@ struct TransportServiceView: View {
             deadline: "2024-01-22",
             description: "跨境电商货物，需要清关服务",
             postedDate: "2024-01-10",
-            contactName: "刘总监"
+            contactName: "刘总监",
+            equipmentType: "集装箱车",
+            cargoType: "电子产品",
+            distance: "440 mi",
+            urgency: "标准",
+            loadingType: "机械装卸",
+            paymentTerms: "30天账期",
+            priceValue: 750,
+            distanceValue: 440
+        ),
+        PostLoad(
+            title: "亚特兰大到奥兰多化工运输",
+            carrier: "FEDEX",
+            origin: "亚特兰大, GA",
+            destination: "奥兰多, FL",
+            weight: "12,000 lbs",
+            price: "$2,100",
+            deadline: "2024-01-25",
+            description: "化工原料运输，需要危险品资质",
+            postedDate: "2024-01-11",
+            contactName: "孙工程师",
+            equipmentType: "危险品车",
+            cargoType: "化工用品",
+            distance: "462 mi",
+            urgency: "紧急",
+            loadingType: "专业装卸",
+            paymentTerms: "预付款",
+            priceValue: 2100,
+            distanceValue: 462
+        ),
+        PostLoad(
+            title: "凤凰城到盐湖城服装运输",
+            carrier: "WALMART",
+            origin: "凤凰城, AZ",
+            destination: "盐湖城, UT",
+            weight: "6,500 lbs",
+            price: "$1,400",
+            deadline: "2024-01-28",
+            description: "季节性服装，要求干燥环境",
+            postedDate: "2024-01-12",
+            contactName: "林女士",
+            equipmentType: "干货车",
+            cargoType: "服装纺织",
+            distance: "651 mi",
+            urgency: "标准",
+            loadingType: "人工装卸",
+            paymentTerms: "15天账期",
+            priceValue: 1400,
+            distanceValue: 651
         )
     ]
     
@@ -109,13 +226,64 @@ struct TransportServiceView: View {
             filtered = filtered.filter { $0.carrier == selectedCarrier }
         }
         
+        // 按车型筛选
+        if selectedEquipment != "全部" {
+            filtered = filtered.filter { $0.equipmentType == selectedEquipment }
+        }
+        
+        // 按货物类型筛选
+        if selectedCargoType != "全部" {
+            filtered = filtered.filter { $0.cargoType == selectedCargoType }
+        }
+        
+        // 按紧急程度筛选
+        if selectedUrgency != "全部" {
+            filtered = filtered.filter { $0.urgency == selectedUrgency }
+        }
+        
+        // 按距离筛选
+        if selectedDistance != "全部" {
+            switch selectedDistance {
+            case "同城":
+                filtered = filtered.filter { $0.distanceValue < 50 }
+            case "短途(<200mi)":
+                filtered = filtered.filter { $0.distanceValue < 200 }
+            case "中途(200-500mi)":
+                filtered = filtered.filter { $0.distanceValue >= 200 && $0.distanceValue <= 500 }
+            case "长途(>500mi)":
+                filtered = filtered.filter { $0.distanceValue > 500 }
+            default:
+                break
+            }
+        }
+        
+        // 按价格区间筛选
+        if priceRange != "全部" {
+            switch priceRange {
+            case "$0-500":
+                filtered = filtered.filter { $0.priceValue <= 500 }
+            case "$500-1000":
+                filtered = filtered.filter { $0.priceValue > 500 && $0.priceValue <= 1000 }
+            case "$1000-2000":
+                filtered = filtered.filter { $0.priceValue > 1000 && $0.priceValue <= 2000 }
+            case "$2000-5000":
+                filtered = filtered.filter { $0.priceValue > 2000 && $0.priceValue <= 5000 }
+            case "$5000+":
+                filtered = filtered.filter { $0.priceValue > 5000 }
+            default:
+                break
+            }
+        }
+        
         // 按搜索文本筛选
         if !searchText.isEmpty {
             filtered = filtered.filter { 
                 $0.title.localizedCaseInsensitiveContains(searchText) ||
                 $0.origin.localizedCaseInsensitiveContains(searchText) ||
                 $0.destination.localizedCaseInsensitiveContains(searchText) ||
-                $0.carrier.localizedCaseInsensitiveContains(searchText)
+                $0.carrier.localizedCaseInsensitiveContains(searchText) ||
+                $0.cargoType.localizedCaseInsensitiveContains(searchText) ||
+                $0.equipmentType.localizedCaseInsensitiveContains(searchText)
             }
         }
         
@@ -129,7 +297,7 @@ struct TransportServiceView: View {
                 HStack {
                     Image(systemName: "magnifyingglass")
                         .foregroundColor(.gray)
-                    TextField("搜索货运信息...", text: $searchText)
+                    TextField("搜索货运信息、城市、货物类型...", text: $searchText)
                         .font(.system(size: 17))
                 }
                 .padding(.horizontal, 16)
@@ -147,28 +315,19 @@ struct TransportServiceView: View {
                 .opacity(isAnimated ? 1 : 0)
                 .offset(y: isAnimated ? 0 : -10)
                 
-                // 运输商筛选栏
+                // 快速筛选栏 - 运输商
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach(carriers, id: \.self) { carrier in
-                            Button(action: {
-                                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                    selectedCarrier = carrier
+                            FilterButton(
+                                title: carrier,
+                                isSelected: selectedCarrier == carrier,
+                                action: {
+                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                        selectedCarrier = carrier
+                                    }
                                 }
-                            }) {
-                                Text(carrier)
-                                    .font(.system(size: 14, weight: .medium))
-                                    .foregroundColor(selectedCarrier == carrier ? .white : Color(red: 34/255, green: 139/255, blue: 34/255))
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 8)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .fill(selectedCarrier == carrier ? 
-                                                Color(red: 34/255, green: 139/255, blue: 34/255) : 
-                                                Color(red: 34/255, green: 139/255, blue: 34/255).opacity(0.1)
-                                            )
-                                    )
-                            }
+                            )
                         }
                     }
                     .padding(.horizontal, 16)
@@ -177,11 +336,108 @@ struct TransportServiceView: View {
                 .opacity(isAnimated ? 1 : 0)
                 .offset(y: isAnimated ? 0 : -10)
                 
+                // 高级筛选按钮和筛选条
+                VStack(spacing: 8) {
+                    // 高级筛选切换按钮
+                    HStack {
+                        Button(action: {
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                showAdvancedFilters.toggle()
+                            }
+                        }) {
+                            HStack(spacing: 6) {
+                                Image(systemName: "slider.horizontal.3")
+                                    .font(.system(size: 14))
+                                Text("高级筛选")
+                                    .font(.system(size: 14, weight: .medium))
+                                Image(systemName: showAdvancedFilters ? "chevron.up" : "chevron.down")
+                                    .font(.system(size: 12))
+                            }
+                            .foregroundColor(Color(red: 34/255, green: 139/255, blue: 34/255))
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color(red: 34/255, green: 139/255, blue: 34/255).opacity(0.1))
+                            )
+                        }
+                        
+                        Spacer()
+                        
+                        // 清除筛选
+                        if selectedEquipment != "全部" || selectedCargoType != "全部" || selectedDistance != "全部" || selectedUrgency != "全部" || priceRange != "全部" || selectedCarrier != "全部" {
+                            Button(action: {
+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                    selectedCarrier = "全部"
+                                    selectedEquipment = "全部"
+                                    selectedCargoType = "全部"
+                                    selectedDistance = "全部"
+                                    selectedUrgency = "全部"
+                                    priceRange = "全部"
+                                }
+                            }) {
+                                HStack(spacing: 4) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .font(.system(size: 12))
+                                    Text("清除")
+                                        .font(.system(size: 12, weight: .medium))
+                                }
+                                .foregroundColor(.gray)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(Color.gray.opacity(0.1))
+                                )
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.top, 8)
+                    
+                    // 高级筛选选项
+                    if showAdvancedFilters {
+                        VStack(spacing: 8) {
+                            // 车型筛选
+                            FilterRowView(title: "车型", options: equipmentTypes, selection: $selectedEquipment)
+                            
+                            // 货物类型筛选
+                            FilterRowView(title: "货物", options: cargoTypes, selection: $selectedCargoType)
+                            
+                            // 距离筛选
+                            FilterRowView(title: "距离", options: distances, selection: $selectedDistance)
+                            
+                            // 紧急程度筛选
+                            FilterRowView(title: "时效", options: urgencies, selection: $selectedUrgency)
+                            
+                            // 价格区间筛选
+                            FilterRowView(title: "价格", options: priceRanges, selection: $priceRange)
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 8)
+                        .transition(.opacity.combined(with: .move(edge: .top)))
+                    }
+                }
+                .opacity(isAnimated ? 1 : 0)
+                .offset(y: isAnimated ? 0 : -10)
+                
+                // 结果统计
+                HStack {
+                    Text("找到 \(filteredPostLoads.count) 条货源")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(.gray)
+                    
+                    Spacer()
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 8)
+                .opacity(isAnimated ? 1 : 0)
+                
                 // 货运订单列表
                 ScrollView {
                     LazyVStack(spacing: 12) {
                         ForEach(Array(filteredPostLoads.enumerated()), id: \.element.id) { index, postLoad in
-                            PostLoadCardView(postLoad: postLoad)
+                            EnhancedPostLoadCardView(postLoad: postLoad)
                                 .opacity(isAnimated ? 1 : 0)
                                 .offset(y: isAnimated ? 0 : 20)
                                 .animation(DesignSystem.Animation.spring.delay(0.05 * Double(index)), value: isAnimated)
@@ -249,8 +505,64 @@ struct TransportServiceView: View {
     }
 }
 
-// 货运订单卡片视图
-struct PostLoadCardView: View {
+// 筛选按钮组件
+struct FilterButton: View {
+    let title: String
+    let isSelected: Bool
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(.system(size: 14, weight: .medium))
+                .foregroundColor(isSelected ? .white : Color(red: 34/255, green: 139/255, blue: 34/255))
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(isSelected ? 
+                            Color(red: 34/255, green: 139/255, blue: 34/255) : 
+                            Color(red: 34/255, green: 139/255, blue: 34/255).opacity(0.1)
+                        )
+                )
+        }
+    }
+}
+
+// 筛选行组件
+struct FilterRowView: View {
+    let title: String
+    let options: [String]
+    @Binding var selection: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundColor(.black)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(options, id: \.self) { option in
+                        FilterButton(
+                            title: option,
+                            isSelected: selection == option,
+                            action: {
+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                    selection = option
+                                }
+                            }
+                        )
+                    }
+                }
+                .padding(.horizontal, 2)
+            }
+        }
+    }
+}
+
+// 增强版货运订单卡片视图
+struct EnhancedPostLoadCardView: View {
     let postLoad: PostLoad
     @State private var isPressed = false
     
@@ -268,13 +580,46 @@ struct PostLoadCardView: View {
                     
                     Spacer()
                     
-                    Text(postLoad.carrier)
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(.white)
+                    HStack(spacing: 6) {
+                        Text(postLoad.carrier)
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color(red: 34/255, green: 139/255, blue: 34/255))
+                            .cornerRadius(8)
+                        
+                        // 紧急标签
+                        if postLoad.urgency == "紧急" {
+                            Text("急")
+                                .font(.system(size: 10, weight: .bold))
+                                .foregroundColor(.white)
+                                .frame(width: 20, height: 20)
+                                .background(Color.red)
+                                .cornerRadius(10)
+                        }
+                    }
+                }
+                
+                // 车型和货物类型标签
+                HStack(spacing: 8) {
+                    Label(postLoad.equipmentType, systemImage: "truck.box.fill")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(red: 34/255, green: 139/255, blue: 34/255))
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
-                        .background(Color(red: 34/255, green: 139/255, blue: 34/255))
-                        .cornerRadius(8)
+                        .background(Color(red: 34/255, green: 139/255, blue: 34/255).opacity(0.1))
+                        .cornerRadius(6)
+                    
+                    Label(postLoad.cargoType, systemImage: "cube.box.fill")
+                        .font(.system(size: 12))
+                        .foregroundColor(.blue)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.blue.opacity(0.1))
+                        .cornerRadius(6)
+                    
+                    Spacer()
                 }
                 
                 // 路线信息
@@ -288,10 +633,15 @@ struct PostLoadCardView: View {
                             .foregroundColor(.black)
                     }
                     
-                    Image(systemName: "arrow.right")
-                        .font(.system(size: 16))
-                        .foregroundColor(Color(red: 34/255, green: 139/255, blue: 34/255))
-                        .padding(.horizontal, 8)
+                    VStack(spacing: 4) {
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 16))
+                            .foregroundColor(Color(red: 34/255, green: 139/255, blue: 34/255))
+                        Text(postLoad.distance)
+                            .font(.system(size: 11))
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.horizontal, 8)
                     
                     VStack(alignment: .leading, spacing: 4) {
                         Text("终点")
@@ -336,6 +686,29 @@ struct PostLoadCardView: View {
                         Text(postLoad.deadline)
                             .font(.system(size: 14))
                             .foregroundColor(.black)
+                    }
+                }
+                
+                // 装卸和支付信息
+                HStack {
+                    HStack(spacing: 4) {
+                        Image(systemName: "wrench.and.screwdriver")
+                            .font(.system(size: 11))
+                            .foregroundColor(.gray)
+                        Text(postLoad.loadingType)
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
+                    }
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 4) {
+                        Image(systemName: "creditcard")
+                            .font(.system(size: 11))
+                            .foregroundColor(.gray)
+                        Text(postLoad.paymentTerms)
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
                     }
                 }
                 
